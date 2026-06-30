@@ -1,5 +1,5 @@
 import Product from "./components/Product";
-import Cart from "./components/cart";
+import Cart from "./components/Cart.jsx";
 import { Routes,Route } from "react-router-dom";
 import Navbar from './components/Navbar.jsx';
 import Home from "./components/Home.jsx";
