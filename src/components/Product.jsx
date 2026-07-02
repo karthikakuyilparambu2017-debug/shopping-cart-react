@@ -3,7 +3,7 @@ import { useEffect,useState } from "react";
 import { addToCart } from "../features/cart/CartSlice";
 import ProductReducer from "../features/product/ProductSlice";
 import { fetchProduct } from "../features/product/ProductSlice";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 function Product(){
     const dispatch=useDispatch();
@@ -51,8 +51,8 @@ const handleaddToCart = (prod)=>{
       Products
     </h2>
 
-    <div className="row justify-content-center mb-4">
-      <div className="col-md-6">
+    <div className="row justify-content-center mb-5">
+  <div className="col-12 col-sm-10 col-md-8 col-lg-6">
         <input
           type="text"
           className="form-control form-control-lg shadow-sm"
@@ -67,45 +67,68 @@ const handleaddToCart = (prod)=>{
 
       {searchItem.map((prod) => (
 
-        <div className="col-lg-3 col-md-4 col-sm-6" key={prod.id}>
+       <div
+  className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+  key={prod.id}
+>
 
-          <div className="card h-100 shadow border-0">
+  <div
+  className="card border-0 shadow h-100 rounded-4"
+  style={{
+    transition: "0.3s",
+  }}
+>
 
-            <img
-              src={prod.image}
-              alt={prod.title}
-              className="card-img-top p-3"
-              style={{
-                height: "220px",
-                objectFit: "contain"
-              }}
-            />
+    <div className="text-center p-3">
 
-            <div className="card-body d-flex flex-column">
+      <img
+        src={prod.image}
+        alt={prod.title}
+        className="img-fluid"
+        style={{
+height: "200px",
+width: "100%",
+objectFit: "contain",
+}}
+      />
 
-              <h6
-                className="card-title"
-                style={{ minHeight: "50px" }}
-              >
-                {prod.title}
-              </h6>
+    </div>
 
-              <h5 className="text-success fw-bold">
-                ₹ {prod.price}
-              </h5>
+    <div className="card-body d-flex flex-column">
 
-              <button
-                className="btn btn-primary mt-auto"
-                onClick={() => handleaddToCart(prod)}
-              >
-                Add to Cart
-              </button>
+      <span
+  className="badge bg-success mb-3 px-3 py-2"
+  style={{ width: "fit-content" }}
+>
+        Free Delivery
+      </span>
 
-            </div>
+      <h6 className="fw-bold">
+        {prod.title.length > 40
+          ? prod.title.substring(0,40) + "..."
+          : prod.title}
+      </h6>
 
-          </div>
+      <h4 className="text-danger fw-bold mt-2">
+        ₹ {prod.price}
+      </h4>
 
-        </div>
+      <p className="text-muted mb-2">
+        ⭐⭐⭐⭐☆ (4.5)
+      </p>
+
+      <button
+        className="btn btn-warning fw-bold mt-auto"
+        onClick={() => handleaddToCart(prod)}
+      >
+        🛒 Add to Cart
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
       ))}
 

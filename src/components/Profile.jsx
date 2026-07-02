@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 function Profile(){
     const [user,setUser]=useState({
         name:"",
@@ -14,14 +15,19 @@ function Profile(){
         setUser(savedUser);
     }
 },[]);
+const navigate=useNavigate();
 const handleChange=(e)=>{
 setUser({...user,[e.target.name]:e.target.value,
 });
 };
-const handleSubmit=(e)=>{
+const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("user",JSON.stringify(user))
-     alert("Profile Saved Successfully!");
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Profile Saved Successfully!");
+
+    navigate("/profile");
 };
 const isSaved=localStorage.getItem("user");
     return(

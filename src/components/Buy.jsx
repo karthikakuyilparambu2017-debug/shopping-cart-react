@@ -18,60 +18,78 @@ function Buy(){
       dispatch(clearCart());
       navigate("/order")
     }
-    return(
-          <div className="container py-5">
+    return (
+  <div className="container py-5">
 
-      <h2 className="text-center text-primary fw-bold mb-5">
-        Checkout
-      </h2>
+    {/* Heading */}
+    <div className="text-center mb-5">
+      <h1 className="fw-bold text-primary">
+        Secure Checkout
+      </h1>
+      <p className="text-muted">
+        Review your order before placing it.
+      </p>
+    </div>
 
-      <div className="row">
+    <div className="row">
 
-        {/* Left Side - Products */}
-        <div className="col-lg-8">
+      {/* LEFT SIDE */}
+      <div className="col-lg-8">
 
-          {cartItem.map((item) => (
+        {cartItem.map((item) => (
 
-            <div className="card shadow mb-4" key={item.id}>
+          <div
+            className="card border-0 shadow-lg rounded-4 mb-4"
+            key={item.id}
+          >
 
-              <div className="row g-0 align-items-center">
+            <div className="row g-0 align-items-center">
 
-                <div className="col-md-4 text-center p-3">
+              <div className="col-md-4 text-center p-4">
 
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="img-fluid"
-                    style={{
-                      height: "180px",
-                      objectFit: "contain",
-                    }}
-                  />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="img-fluid"
+                  style={{
+                    height: "180px",
+                    objectFit: "contain",
+                  }}
+                />
 
-                </div>
+              </div>
 
-                <div className="col-md-8">
+              <div className="col-md-8">
 
-                  <div className="card-body">
+                <div className="card-body">
 
-                    <h5 className="card-title">
-                      {item.title}
-                    </h5>
+                  <span className="badge bg-success mb-2">
+                    Free Delivery
+                  </span>
 
-                    <p className="mb-2">
-                      <strong>Price:</strong> ₹{item.price}
-                    </p>
+                  <h4 className="fw-bold">
+                    {item.title}
+                  </h4>
 
-                    <p className="mb-2">
-                      <strong>Quantity:</strong> {item.quantity}
-                    </p>
+                  <p className="text-warning mb-2">
+                    ⭐⭐⭐⭐⭐ (4.8 Rating)
+                  </p>
 
-                    <p className="text-success fw-bold">
-                      Subtotal :
-                      ₹{(item.price * item.quantity).toFixed(2)}
-                    </p>
+                  <h5 className="text-danger fw-bold">
+                    ₹ {item.price}
+                  </h5>
 
-                  </div>
+                  <p>
+                    Quantity :
+                    <span className="badge bg-primary ms-2">
+                      {item.quantity}
+                    </span>
+                  </p>
+
+                  <p className="text-success fw-bold fs-5">
+                    Subtotal :
+                    ₹ {(item.price * item.quantity).toFixed(2)}
+                  </p>
 
                 </div>
 
@@ -79,58 +97,100 @@ function Buy(){
 
             </div>
 
-          ))}
+          </div>
 
-        </div>
+        ))}
 
-        {/* Right Side - Order Summary */}
-        <div className="col-lg-4">
+      </div>
 
-          <div className="card shadow sticky-top">
+      {/* RIGHT SIDE */}
+      <div className="col-lg-4">
 
-            <div className="card-body">
+        <div
+          className="card shadow-lg border-0 rounded-4 sticky-top"
+          style={{
+    top: "100px",
+    zIndex: 1
+}}
+        >
 
-              <h4 className="text-center mb-4">
-                Order Summary
-              </h4>
+          <div className="card-body p-4">
 
-              <div className="d-flex justify-content-between mb-3">
-                <span>Items Total</span>
-                <span>₹{totalAmount.toFixed(2)}</span>
-              </div>
+            <h3 className="text-center fw-bold mb-4">
+              Order Summary
+            </h3>
 
-              <div className="d-flex justify-content-between mb-3">
-                <span>Delivery Charge</span>
-                <span>₹{deliveryCharge}</span>
-              </div>
+            <div className="d-flex justify-content-between mb-3">
+              <span>Items Total</span>
+              <strong>₹ {totalAmount.toFixed(2)}</strong>
+            </div>
 
-              <div className="d-flex justify-content-between mb-3">
-                <span>GST</span>
-                <span>₹{gst}</span>
-              </div>
+            <div className="d-flex justify-content-between mb-3">
+              <span>Delivery</span>
+              <span className="text-success">
+                ₹ {deliveryCharge}
+              </span>
+            </div>
 
-              <hr />
+            <div className="d-flex justify-content-between mb-3">
+              <span>GST</span>
+              <span>₹ {gst}</span>
+            </div>
 
-              <div className="d-flex justify-content-between fs-4 fw-bold text-primary">
-                <span>Grand Total</span>
-                <span>₹{grandTotal.toFixed(2)}</span>
-              </div>
+            <div className="d-flex justify-content-between mb-3">
+              <span>Discount</span>
+              <span className="text-success">
+                - ₹100
+              </span>
+            </div>
 
-              <button
-                className="btn btn-success w-100 mt-4"
-                onClick={handlePalaceOrder}
-              >
-                Place Order
-              </button>
+            <hr />
 
-              <button
-                className="btn btn-outline-secondary w-100 mt-2"
-                onClick={() => navigate("/cart")}
-              >
-                Back to Cart
-              </button>
+            <div className="d-flex justify-content-between fs-3 fw-bold text-primary">
+
+              <span>Total</span>
+
+              <span>
+                ₹ {(grandTotal - 100).toFixed(2)}
+              </span>
 
             </div>
+
+            <hr />
+
+            <div className="bg-light rounded-3 p-3 mb-4">
+
+              <h6 className="fw-bold">
+                Why Shop With Us?
+              </h6>
+
+              <p className="mb-1">
+                Secure Payment
+              </p>
+
+              <p className="mb-1">
+                Fast Delivery
+              </p>
+
+              <p className="mb-0">
+                 Easy Returns
+              </p>
+
+            </div>
+
+            <button
+              className="btn btn-success btn-lg w-100 mb-3"
+              onClick={handlePalaceOrder}
+            >
+               Place Order
+            </button>
+
+            <button
+              className="btn btn-outline-dark w-100"
+              onClick={() => navigate("/cart")}
+            >
+              ← Back to Cart
+            </button>
 
           </div>
 
@@ -139,6 +199,9 @@ function Buy(){
       </div>
 
     </div>
-    );
+
+  </div>
+);
+    
 }
 export default Buy;
